@@ -8,13 +8,66 @@ vize1500@student.miun.se
 <html lang=en>
 
 <head>
+  <title>Speed typer 2000</title>
   <meta charset=utf-8>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel=stylesheet href=css/style.css>
+  <script src=js/script.js></script>
 </head>
 
 <body>
-  <h1>Hello World!</h1>
-</body>
 
+<!-- Header -->
+<header>
+  <h1>Speed typer 2000</h1>
+</header>
+
+<!-- Main Content -->
+<main>
+  <section id=settings-area>
+    <h2>Settings</h2>
+    <form>
+      <!-- Text selection -->
+      <div class=form-element>
+        <label for=text-selection>Select text:</label>
+        <select name=text-selection id=text-selection>
+          <option value=volvo>Volvo</option>
+          <option value=saab>Saab</option>
+          <option value=mercedes>Mercedes</option>
+          <option value=audi>Audi</option>
+        </select>
+      </div>
+      
+      <!-- Ignore case -->
+      <div class=form-element>
+        <label for=case-ignore>Check to ignore case:</label>
+        <input type=checkbox name=case-ignore id=case-ignore>
+      </div>
+
+      <!-- Language selection -->
+      <div class=form-element>
+        <label>Select language:</label>
+        <input type=radio name=language-selection value=english id=english>
+        <label for=english>English</label>
+        <input type=radio name=language-selection value=swedish id=swedish>
+        <label for=swedish>Swedish</label>
+      </div>
+    </form>
+
+  </section>
+
+  <section id=text-area>
+    <h2 id=book-title>Book title</h2>
+    <div id=words>Officia et corrupti odio quisquam doloremque debitis deserunt. Repudiandae incidunt ipsa debitis mollitia similique dolorem doloremque. Qui sit dolore est et optio doloribus. Consequatur vel est atque. Fugiat architecto ut minus perspiciatis qui veniam. Pariatur quia quae odio quo est corrupti nisi.</div>
+    <input type=text id=typing-area>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <p>Created by: Viktor Zetterström</p>
+  <a href=mailto:vize1500@student.miun.se>Contact</a>
+</footer>
+
+</body>
 
 </html>

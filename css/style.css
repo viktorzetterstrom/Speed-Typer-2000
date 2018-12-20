@@ -1,6 +1,20 @@
-body h1 {
+@charset "UTF-8";
+body {
+  background-image: url("../img/background.jpg");
+  color: #f7f7f7;
   font: 100% Helvetica, sans-serif;
-  color: #2bff00;
 }
 
+header, main, footer {
+  background: #292929ee;
+  border: 1px solid #ddddddee;
+  border-radius:   1em;
+  width: 600px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+section h2  {
+  margin: 10px;
+}
 /*# sourceMappingURL=style.css.map */
