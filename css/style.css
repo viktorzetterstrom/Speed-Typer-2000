@@ -45,6 +45,10 @@ td {
   padding: 10px;
 }
 
+td span {
+  font-weight: bold;
+}
+
 #text-area {
   border: 1px solid #ddddddee;
   border-radius: 0.2rem;
@@ -63,14 +67,15 @@ td {
   font-size: 100%;
 }
 
-#play-button, #stop-button {
-  background: rgba(0, 0, 0, 0);
+#play-button {
+  background-image: url("/img/play-button.png");
+  background-size: 100%;
   width: 30px;
   height: 30px;
 }
 
-#play-button:hover, #stop-button:hover {
-  -webkit-box-shadow: 0px 0px 10px 0px white;
-          box-shadow: 0px 0px 10px 0px white;
+#play-button:hover {
+  -webkit-box-shadow: 0px 0px 5px 0px white;
+          box-shadow: 0px 0px 5px 0px white;
 }
 /*# sourceMappingURL=style.css.map */

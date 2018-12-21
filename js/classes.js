@@ -43,30 +43,3 @@ export class Text {
     return this._numberOfChars
   }
 }
-
-/**
- * Class that keeps track of app settings, language and if casing should be
- * ignored or not.
- */
-export class Settings {
-  constructor (ignoreCasing, language) {
-    this._ignoreCasing = ignoreCasing
-    this._language = language
-  }
-
-  get ignoreCasing () {
-    return this._ignoreCasing
-  }
-
-  set ignoreCasing (value) {
-    this._ignoreCasing = value
-  }
-
-  get language () {
-    return this._language
-  }
-
-  set language (value) {
-    this._language = value
-  }
-}

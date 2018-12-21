@@ -30,21 +30,21 @@ vize1500@student.miun.se
     <form>
       <!-- Text selection -->
       <div class=form-element>
-        <label for=text-selection>Select text:</label>
+        <label for=text-selection>Text:</label>
         <select name=text-selection id=text-selection>
-          
+
         </select>
       </div>
       
       <!-- Ignore case -->
       <div class=form-element>
-        <label for=case-ignore>Check to ignore case:</label>
+        <label for=case-ignore>Ignore casing:</label>
         <input type=checkbox name=case-ignore id=case-ignore>
       </div>
 
       <!-- Language selection -->
       <div class=form-element>
-        <label>Select language:</label>
+        <label>Language:</label>
         <input type=radio name=language-selection value=english id=english>
         <label for=english>English</label>
         <input type=radio name=language-selection value=swedish id=swedish>
@@ -61,8 +61,7 @@ vize1500@student.miun.se
     <p id=words></p>
   </section>
   <input type=text id=typing-area placeholder="Type here">
-  <input id=play-button type=image src=img/play-button.png>
-  <input id=stop-button type=image src=img/stop-button.png>
+  <button id=play-button></button>
 
   <!-- Area showing stats of typing-->
   <section>
