@@ -1,7 +1,7 @@
 body {
   background-image: url("../img/background.jpg");
   color: #f7f7f7;
-  font: 100% Helvetica, sans-serif;
+  font: 100% Helvetica sans-serif;
 }
 
 header, main, footer {
@@ -13,7 +13,7 @@ header, main, footer {
   text-align: center;
 }
 
-header {
+header, #stats-area {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -21,6 +21,7 @@ header {
       justify-content: space-around;
 }
 
+td
 h2 {
   margin: 5px;
   font-size: 1.2em;
@@ -33,6 +34,15 @@ h3 {
 
 a {
   color: #f7f7f7;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  text-align: right;
+  padding: 10px;
 }
 
 #text-area {

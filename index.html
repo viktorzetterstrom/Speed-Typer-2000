@@ -8,10 +8,10 @@ vize1500@student.miun.se
 <html lang=en>
 
 <head>
-  <title>Speed typer 2000</title>
+  <title>Speed-Typer-2000</title>
   <meta charset=utf-8>
   <link rel=stylesheet href=css/style.css>
-  <script src=js/script.js></script>
+  <script type=module src=js/script.js></script>
 </head>
 
 <body>
@@ -19,7 +19,7 @@ vize1500@student.miun.se
 <!-- Header -->
 <header>
   <img src=img/firepillar.gif alt=firepillar class=firepillar>
-  <h1>Speed typer 2000</h1>
+  <h1>Speed-Typer-2000</h1>
   <img src=img/firepillar.gif alt=firepillar class=firepillar>
 </header>
 
@@ -32,10 +32,7 @@ vize1500@student.miun.se
       <div class=form-element>
         <label for=text-selection>Select text:</label>
         <select name=text-selection id=text-selection>
-          <option value=volvo>Volvo</option>
-          <option value=saab>Saab</option>
-          <option value=mercedes>Mercedes</option>
-          <option value=audi>Audi</option>
+          
         </select>
       </div>
       
@@ -57,25 +54,33 @@ vize1500@student.miun.se
 
   </section>
 
+  <!-- Book text and user input -->
   <section id=text-area>
-    <h2 id=book-title>Book title</h2>
-    <h3 id=book-stats>Author (100 ord, 100 chars)</h3>
-    <p id=words>Officia et corrupti odio quisquam doloremque debitis deserunt. Repudiandae incidunt ipsa debitis mollitia similique dolorem doloremque. Qui sit dolore est et optio doloribus. Consequatur vel est atque. Fugiat architecto ut minus perspiciatis qui veniam. Pariatur quia quae odio quo est corrupti nisi.</p>
+    <h2 id=text-title></h2>
+    <h3><span id=author></span> (<span id=word-count></span> words, <span id=char-count></span> chars)</h3>
+    <p id=words></p>
   </section>
-
   <input type=text id=typing-area placeholder="Type here">
-
   <input id=play-button type=image src=img/play-button.png>
   <input id=stop-button type=image src=img/stop-button.png>
 
-  <section id=stats-area>
+  <!-- Area showing stats of typing-->
+  <section>
     <h2>Statistics</h2>
-    <p>
-      Gross WPM: <span id=gross-wpm>10</span>
-      Accuracy: <span id=accuracy>10</span><br>
-      Net WPM: <span id=net-wpm>10</span>
-      Errors: <span id=errors>10</span>
-    </p>
+    <div id=stats-area>
+      <canvas id=stats-diagram>
+      </canvas>
+      <table>
+        <tr>
+          <td>Gross WPM: <span id=gross-wpm>10</span></td>
+          <td>Accuracy: <span id=accuracy>10</span><br></td>
+        </tr>
+        <tr>
+          <td>Net WPM: <span id=net-wpm>10</span></td>
+          <td>Errors: <span id=errors>10</span></td>
+        </tr>
+      </table>
+    </div>
   </section>
 </main>
 
