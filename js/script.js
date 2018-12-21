@@ -5,33 +5,14 @@
  * vize1500@student.miun.se
  */
 
-import { Text } from './classes.js'
+import { Text, TextArea, StatsArea } from './classes.js'
+import { initSettings } from './functions.js'
 
 // Globals initiated in function initApp()
 let TEXTS // Array of text objects used in app.
+let TEXTAREA // TextArea object encapsulating the text to be entered and its information
+let STATSAREA // StatsArea object encapsulating the stats of the game.
 let RUNNING = false // Boolean used to indicate if the game is running.
-
-/**
- * Updates the text area with given text. Sets word- and charcounts, and changes
- * title and words.
- * @param {Text} text
- */
-function updateTextArea (text) {
-  // Get text area elements
-  let words = document.getElementById('words')
-  let textTitle = document.getElementById('text-title')
-  let wordCount = document.getElementById('word-count')
-  let charCount = document.getElementById('char-count')
-
-  // Set text area values
-  textTitle.innerHTML = text.title
-  wordCount.innerHTML = text.numberOfWords
-  charCount.innerHTML = text.numberOfChars
-  words.innerHTML = ''
-  text.getCharArray().forEach(char => {
-    words.innerHTML += `<span>${char}</span>`
-  })
-}
 
 /**
  * Initiates the app by setting the initial text and setting up the settings.
@@ -41,18 +22,10 @@ function initApp () {
   let text2 = new Text('Visdomsord', 'Cissi', 'Viktor är bäääst! ')
   let text3 = new Text('Vad är detta?', 'Perra', 'mrrrghghhglll')
   TEXTS = [text1, text2, text3]
-
-  // Populate text selection with books
-  let textSelection = document.getElementById('text-selection')
-  TEXTS.forEach(text => {
-    textSelection.innerHTML += `<option value="${text.title}">${text.title}</option>`
-  })
-
-  // Set standard settings of app, swedish on and ignore casing off.
-  document.getElementById('case-ignore').checked = false
-  document.getElementById('swedish').checked = true
-
-  updateTextArea(TEXTS[0])
+  STATSAREA = new StatsArea()
+  TEXTAREA = new TextArea()
+  TEXTAREA.setText(TEXTS[0])
+  initSettings(TEXTS)
 }
 
 /**
@@ -61,7 +34,8 @@ function initApp () {
  */
 function setActiveText () {
   let newText = TEXTS.find(text => text.title === this.value)
-  updateTextArea(newText)
+  STATSAREA.reset()
+  TEXTAREA.setText(newText)
 }
 
 /**
@@ -70,6 +44,12 @@ function setActiveText () {
 function toggleGame () {
   let playButton = document.getElementById('play-button')
   let typingArea = document.getElementById('typing-area')
+
+  var error = !TEXTAREA.typeChar('e')
+
+  if (error) {
+    STATSAREA.addError()
+  }
 
   if (RUNNING) {
     RUNNING = false

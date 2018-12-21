@@ -78,4 +78,16 @@ td span {
   -webkit-box-shadow: 0px 0px 5px 0px white;
           box-shadow: 0px 0px 5px 0px white;
 }
+
+#active-char {
+  background: green;
+}
+
+#typing-error {
+  color: red;
+}
+
+#typed {
+  color: blue;
+}
 /*# sourceMappingURL=style.css.map */
