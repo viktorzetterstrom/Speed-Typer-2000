@@ -29,6 +29,7 @@ function initApp () {
 
   // Initiate stats area and text area
   STATSAREA = new StatsArea()
+  STATSAREA.initStatsDiagram()
   TEXTAREA = new TextArea()
   TEXTAREA.setText(TEXTS[0])
 
@@ -83,9 +84,9 @@ function typingEventHandler (event) {
     stopApp()
   }
 
+  // Ty
   let ignoreCasing = document.getElementById('case-ignore').checked
-  let typingCorrect = TEXTAREA.typeChar(event.key, ignoreCasing)
-  console.log(typingCorrect)
+  TEXTAREA.typeChar(event.key, ignoreCasing)
 
   if (isSpace(event.key)) {
     document.getElementById('typing-area').value = ''

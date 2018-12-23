@@ -140,8 +140,13 @@ export class TextArea {
   }
 }
 
+/**
+ * Class that encapsulates the stats area of the app. Providing functionality
+ * that allows starting and stopping recordig of stats.
+ */
 export class StatsArea {
   constructor () {
+    // Get stat area elements
     this._statsDiagram = document.getElementById('stats-diagram')
     this._grossWpm = document.getElementById('gross-wpm')
     this._netWpm = document.getElementById('net-wpm')
@@ -155,6 +160,17 @@ export class StatsArea {
     this._netWpm.innerHTML = 0
     this._accuracy.innerHTML = 0
     this._errors.innerHTML = 0
+  }
+
+  initStatsDiagram () {
+    let canvas = this._statsDiagram
+    let ctx = canvas.getContext('2d')
+    let height = canvas.height
+    for (let i = height / 4; i < canvas.height; i += height / 4) {
+      ctx.moveTo(0, i)
+      ctx.lineTo(300, i)
+      ctx.stroke()
+    }
   }
 
   reset () {
