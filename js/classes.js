@@ -82,18 +82,30 @@ export class TextArea {
    * is flagged with a typing error. It then moves the active char forward
    * unless the end is reacehd. It returns false if there was an error, false
    * otherwise.
-   * @param {String} char Character that was entered
+   * @param {String} char The character that was typed
+   * @param {Boolean} ignoreCasing Boolean if casing should be ignored.
    */
-  typeChar (char) {
+  typeChar (char, ignoreCasing) {
     var noError = true
     let chars = this._wordsArea.getElementsByTagName('span')
-    chars[this._activeCharIndex].id = 'typed'
+    chars[this._activeCharIndex].id = ''
+    chars[this._activeCharIndex].classList = 'typed'
 
-    if (char !== chars[this._activeCharIndex].innerHTML) {
-      chars[this._activeCharIndex].id = 'typing-error'
-      noError = false
+    // If the typed char is incorrect, mark with error.
+    let corrChar = chars[this._activeCharIndex].innerHTML
+    if (ignoreCasing) {
+      if (char !== corrChar.toLowerCase() && char !== corrChar.toUpperCase()) {
+        chars[this._activeCharIndex].classList = 'typing-error'
+        noError = false
+      }
+    } else {
+      if (char !== corrChar) {
+        chars[this._activeCharIndex].classList = 'typing-error'
+        noError = false
+      }
     }
 
+    // Move the active char forward.
     if (this._activeCharIndex < chars.length - 1) {
       this._activeCharIndex++
       chars[this._activeCharIndex].id = 'active-char'
@@ -119,8 +131,10 @@ export class TextArea {
     for (var i = 0; i < chars.length; i++) {
       if (i === 0) {
         chars[i].id = 'active-char'
+        chars[i].className = ''
       } else {
         chars[i].id = ''
+        chars[i].className = ''
       }
     }
   }

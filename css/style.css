@@ -127,6 +127,16 @@ form {
   text-align: center;
 }
 
+.running-ok {
+  -webkit-box-shadow: 0px 0px 10px 0px white;
+          box-shadow: 0px 0px 10px 0px white;
+}
+
+.running.error {
+  -webkit-box-shadow: 0px 0px 10px 0px red;
+          box-shadow: 0px 0px 10px 0px red;
+}
+
 #typing-area {
   display: block;
   height: 30px;
@@ -134,11 +144,11 @@ form {
   margin: 10px auto;
   text-align: center;
   font-size: 100%;
+  font-family: "fira-code";
 }
 
-#typing-area:disabled  {
-  background-color: grey;
-  color: blue;
+#typing-area:disabled {
+  background: grey;
 }
 
 #play-button {
@@ -158,11 +168,11 @@ form {
   background: gray;
 }
 
-#typing-error {
+.typing-error {
   color: red;
 }
 
-#typed {
+.typed {
   color: darkgray;
 }
 

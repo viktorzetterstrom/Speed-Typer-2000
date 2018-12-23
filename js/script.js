@@ -58,6 +58,7 @@ function toggleGame () {
   if (RUNNING) {
     RUNNING = false
     stopApp()
+    typingArea.blur()
   } else {
     TEXTAREA.reset()
     RUNNING = true
@@ -82,7 +83,8 @@ function typingEventHandler (event) {
     stopApp()
   }
 
-  var typingCorrect = TEXTAREA.typeChar(event.key)
+  let ignoreCasing = document.getElementById('case-ignore').checked
+  let typingCorrect = TEXTAREA.typeChar(event.key, ignoreCasing)
   console.log(typingCorrect)
 
   if (isSpace(event.key)) {

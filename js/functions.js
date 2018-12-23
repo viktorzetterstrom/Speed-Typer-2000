@@ -26,14 +26,21 @@ export function initSettings (texts) {
  * Also changes the background for the play button to indicate it is running.
  */
 export function startApp () {
+  // Change playbutton.
   let playButton = document.getElementById('play-button')
   playButton.style.backgroundImage = 'url("/img/stop-button.png")'
 
+  // Add box shadow.
+  let textArea = document.getElementById('text-area')
+  textArea.className = 'running-ok'
+
+  // Disable settings.
   document.getElementById('text-selection').disabled = true
   document.getElementById('case-ignore').disabled = true
   document.getElementById('swedish').disabled = true
   document.getElementById('english').disabled = true
 
+  // Empty and enable typing area.
   document.getElementById('typing-area').value = ''
   document.getElementById('typing-area').disabled = false
 }
@@ -43,14 +50,21 @@ export function startApp () {
  * The play button background is reversed to normal background.
  */
 export function stopApp () {
+  // Change playbutton.
   let playButton = document.getElementById('play-button')
   playButton.style.backgroundImage = 'url("/img/play-button.png")'
 
+  // Remove box shadow.
+  let textArea = document.getElementById('text-area')
+  textArea.className = ''
+
+  // Enable settings.
   document.getElementById('text-selection').disabled = false
   document.getElementById('case-ignore').disabled = false
   document.getElementById('swedish').disabled = false
   document.getElementById('english').disabled = false
 
+  // Disable typing area.
   document.getElementById('typing-area').disabled = true
 }
 
