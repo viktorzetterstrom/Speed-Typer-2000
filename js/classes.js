@@ -48,6 +48,7 @@ export class TextArea {
   constructor () {
     this._wordsArea = document.getElementById('words-area')
     this._textTitle = document.getElementById('text-title')
+    this._textAuthor = document.getElementById('text-author')
     this._wordCount = document.getElementById('word-count')
     this._charCount = document.getElementById('char-count')
     this._activeCharIndex = 0
@@ -59,6 +60,7 @@ export class TextArea {
    */
   setText (text) {
     this._textTitle.innerHTML = text.title
+    this._textAuthor.innerHTML = text.author
     this._wordCount.innerHTML = text.numberOfWords
     this._charCount.innerHTML = text.numberOfChars
     this._wordsArea.innerHTML = ''
@@ -98,6 +100,30 @@ export class TextArea {
     }
     return noError
   }
+
+  /**
+   * Returns true if the active char has reached the end of the text.
+   */
+  atEnd () {
+    let chars = this._wordsArea.getElementsByTagName('span')
+    console.log(this._activeCharIndex)
+    return this._activeCharIndex === chars.length - 1
+  }
+
+  /**
+   * Resets the textarea, removes formatting from the text to enable a new game.
+   */
+  reset () {
+    this._activeCharIndex = 0
+    let chars = this._wordsArea.getElementsByTagName('span')
+    for (var i = 0; i < chars.length; i++) {
+      if (i === 0) {
+        chars[i].id = 'active-char'
+      } else {
+        chars[i].id = ''
+      }
+    }
+  }
 }
 
 export class StatsArea {
@@ -108,7 +134,8 @@ export class StatsArea {
     this._accuracy = document.getElementById('accuracy')
     this._errors = document.getElementById('errors')
 
-    this._typedEntries = 0
+    this._goodWords = 0
+    this._badWords = 0
 
     this._grossWpm.innerHTML = 0
     this._netWpm.innerHTML = 0
@@ -127,11 +154,15 @@ export class StatsArea {
     this._errors.innerHTML++
   }
 
+  addWord () {
+
+  }
+
   start () {
 
   }
 
   update () {
-    this._grossWpm.innerHTML = (typed_entries / 5) / elapsed_minutes;
+    // this._grossWpm.innerHTML = (typedEntries / 5) / elapsedMinutes;
   }
 }

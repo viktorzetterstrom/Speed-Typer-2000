@@ -1,16 +1,64 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "fira-code";
+  src: url("/font/FiraCode-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "staatliches";
+  src: url("/font/Staatliches-Regular.woff2") format("woff2");
+}
+
+h1, h2, h3 {
+  font-family: "staatliches", sans-serif;
+}
+
 body {
   background-image: url("../img/background.jpg");
   color: #f7f7f7;
-  font: 100% Helvetica sans-serif;
+  overflow: hidden;
+  font-family: "fira-code", monospace;
 }
 
-header, main, footer {
-  background: #292929ee;
-  border: 1px solid #ddddddee;
-  border-radius: 0.2rem;
+main {
+  background: #444444;
+  border: 2px solid #ddddddee;
   width: 600px;
-  margin: 30px auto;
+  margin: auto;
+  margin-top: 110px;
   text-align: center;
+}
+
+header {
+  background: #444444;
+  border-bottom: 2px solid #ddddddee;
+  border-left: 2px solid #ddddddee;
+  border-right: 2px solid #ddddddee;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 600px;
+}
+
+footer {
+  background: #444444;
+  border-top: 2px solid #ddddddee;
+  border-left: 2px solid #ddddddee;
+  border-right: 2px solid #ddddddee;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 600px;
+}
+
+footer p {
+  margin: 5px;
 }
 
 header, #stats-area {
@@ -19,12 +67,6 @@ header, #stats-area {
   display: flex;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-}
-
-td
-h2 {
-  margin: 5px;
-  font-size: 1.2em;
 }
 
 h3 {
@@ -45,21 +87,48 @@ td {
   padding: 10px;
 }
 
+h1, h2 {
+  margin: 5px;
+}
+
+h1 {
+  font-size: 4em;
+}
+
 td span {
   font-weight: bold;
+  font-size: 1.3em;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+#stats-area {
+  border-top: 2px solid #ddddddee;
+}
+
+#settings-area  {
+  border-bottom: 2px solid #ddddddee;
 }
 
 #text-area {
-  border: 1px solid #ddddddee;
-  border-radius: 0.2rem;
+  border: 2px solid #ddddddee;
+  text-align: left;
   margin: 10px;
   padding: 5px;
 }
 
+#text-area h2, #text-area h3 {
+  text-align: center;
+}
+
 #typing-area {
   display: block;
-  border: 1px solid #ddddddee;
-  border-radius: 0.2rem;
   height: 30px;
   width: 400px;
   margin: 10px auto;
@@ -67,9 +136,15 @@ td span {
   font-size: 100%;
 }
 
+#typing-area:disabled  {
+  background-color: grey;
+  color: blue;
+}
+
 #play-button {
   background-image: url("/img/play-button.png");
   background-size: 100%;
+  margin-bottom: 10px;
   width: 30px;
   height: 30px;
 }
@@ -80,7 +155,7 @@ td span {
 }
 
 #active-char {
-  background: green;
+  background: gray;
 }
 
 #typing-error {
@@ -88,6 +163,14 @@ td span {
 }
 
 #typed {
-  color: blue;
+  color: darkgray;
+}
+
+#stats-diagram {
+  background-color: rgba(128, 128, 128, 0.719);
+  border: 2px solid #ddddddee;
+  margin: 5px;
+  height: 80px;
+  width: 300px;
 }
 /*# sourceMappingURL=style.css.map */
