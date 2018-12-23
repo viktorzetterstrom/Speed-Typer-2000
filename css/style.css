@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @font-face {
   font-family: "fira-code";
   src: url("/font/FiraCode-Light.woff2") format("woff2");
@@ -17,6 +16,8 @@ body {
   background-image: url("../img/background.jpg");
   color: #f7f7f7;
   overflow: hidden;
+  margin: 0;
+  height: 100%;
   font-family: "fira-code", monospace;
 }
 
@@ -108,14 +109,6 @@ form {
       justify-content: space-around;
 }
 
-#stats-area {
-  border-top: 2px solid #ddddddee;
-}
-
-#settings-area  {
-  border-bottom: 2px solid #ddddddee;
-}
-
 #text-area {
   border: 2px solid #ddddddee;
   text-align: left;
@@ -145,10 +138,14 @@ form {
   text-align: center;
   font-size: 100%;
   font-family: "fira-code";
+  -webkit-box-shadow: 0px 0px 10px 0px white;
+          box-shadow: 0px 0px 10px 0px white;
 }
 
 #typing-area:disabled {
   background: grey;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 #play-button {

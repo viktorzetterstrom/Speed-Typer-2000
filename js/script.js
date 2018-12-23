@@ -29,7 +29,7 @@ function initApp () {
 
   // Initiate stats area and text area
   STATSAREA = new StatsArea()
-  STATSAREA.initStatsDiagram()
+  STATSAREA.resetStatsDiagram()
   TEXTAREA = new TextArea()
   TEXTAREA.setText(TEXTS[0])
 

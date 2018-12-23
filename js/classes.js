@@ -162,9 +162,14 @@ export class StatsArea {
     this._errors.innerHTML = 0
   }
 
-  initStatsDiagram () {
+  /**
+   * Initiates the stats diagram by clearing it and drawing three horizontal
+   * lines to make the progress of the user more visible.
+   */
+  resetStatsDiagram () {
     let canvas = this._statsDiagram
     let ctx = canvas.getContext('2d')
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     let height = canvas.height
     for (let i = height / 4; i < canvas.height; i += height / 4) {
       ctx.moveTo(0, i)
@@ -173,26 +178,13 @@ export class StatsArea {
     }
   }
 
+  /**
+   * Resets the Stats area.
+   */
   reset () {
     this._grossWpm.innerHTML = 0
     this._netWpm.innerHTML = 0
     this._accuracy.innerHTML = 0
     this._errors.innerHTML = 0
-  }
-
-  addError () {
-    this._errors.innerHTML++
-  }
-
-  addWord () {
-
-  }
-
-  start () {
-
-  }
-
-  update () {
-    // this._grossWpm.innerHTML = (typedEntries / 5) / elapsedMinutes;
   }
 }
