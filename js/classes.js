@@ -6,13 +6,21 @@
  */
 
 /**
+ * Name: classes.js
+ * This file contains the classes used by the app. The classes were created to
+ * create some encapsulation of the app functions to promote readability of the
+ * app code.
+ */
+
+/**
  * Class representing a Text. Has an author and a string of words, can return
  * the amount of words and the amount of chars in.
  */
 export class Text {
-  constructor (title, author, words) {
+  constructor (title, author, language, words) {
     this._title = title
     this._author = author
+    this._language = language
     this._words = words
     this._numberOfWords = words.split(' ').length
     this._numberOfChars = words.length
@@ -28,6 +36,9 @@ export class Text {
   }
   get author () {
     return this._author
+  }
+  get language () {
+    return this._language
   }
   get words () {
     return this._words
@@ -118,7 +129,6 @@ export class TextArea {
    */
   atEnd () {
     let chars = this._wordsArea.getElementsByTagName('span')
-    console.log(this._activeCharIndex)
     return this._activeCharIndex === chars.length - 1
   }
 

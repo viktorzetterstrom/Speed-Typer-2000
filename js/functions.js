@@ -6,19 +6,49 @@
  */
 
 /**
- * Initializes the settings to default values and populates the list of texts.
- * @param {Array} texts Array of text objects.
+ * Name: functions.js
+ * Contains helper functions used by script.js.
  */
-export function initSettings (texts) {
-  // Populate text selection with book titles.
-  let textSelection = document.getElementById('text-selection')
-  texts.forEach(text => {
-    textSelection.innerHTML += `<option value="${text.title}">${text.title}</option>`
-  })
 
-  // Set standard settings of app, swedish on and ignore casing off.
-  document.getElementById('case-ignore').checked = false
-  document.getElementById('swedish').checked = true
+import { Text } from './classes.js'
+
+/* global XMLHttpRequest */
+
+/**
+ * Gets texts from XML file "texts.xml" via synchronous XMLHttpRequest
+ */
+export function getTextsFromXml () {
+  let returnArray = []
+
+  // Create xml request.
+  let connect = new XMLHttpRequest()
+
+  // Define file and send request.
+  connect.open('GET', 'texts.xml', false)
+  connect.setRequestHeader('Content-Type', 'text/xml')
+  connect.send(null)
+
+  // Place response in document.
+  let doc = connect.responseXML
+
+  // Get root node.
+  let rootNode = doc.childNodes[0]
+
+  let titles = rootNode.getElementsByTagName('title')
+  let authors = rootNode.getElementsByTagName('author')
+  let languages = rootNode.getElementsByTagName('language')
+  let texts = rootNode.getElementsByTagName('text')
+
+  for (let i = 0; i < titles.length; i++) {
+    let title = titles[i].innerHTML
+    let author = authors[i].innerHTML
+    let language = languages[i].innerHTML
+    let text = texts[i].innerHTML
+
+    returnArray.push(new Text(title, author, language, text))
+  }
+
+  return returnArray
 }
 
 /**
@@ -84,4 +114,17 @@ export function isSpace (key) {
 export function shouldIgnore (key) {
   let theIgnorables = ['Shift', 'Backspace', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter']
   return theIgnorables.indexOf(key) > -1
+}
+
+/**
+ * Changes the listing of available texts.
+ * @param {Array of Text objects} texts App texts.
+ */
+export function setTexts (texts) {
+  // Populate text selection with book titles.
+  let textSelection = document.getElementById('text-selection')
+  textSelection.innerHTML = ''
+  texts.forEach(text => {
+    textSelection.innerHTML += `<option value="${text.title}">${text.title}</option>`
+  })
 }

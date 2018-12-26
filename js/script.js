@@ -5,8 +5,15 @@
  * vize1500@student.miun.se
  */
 
-import { Text, TextArea, StatsArea } from './classes.js'
-import { initSettings, startApp, stopApp, isSpace, shouldIgnore } from './functions.js'
+/**
+ * Name: script.js
+ * This is the main file for the app. It contains a number of globals representing
+ * the current state of the app and functions for initiating the app and handling
+ * events in the app.
+ */
+
+import { TextArea, StatsArea } from './classes.js'
+import { startApp, stopApp, isSpace, shouldIgnore, getTextsFromXml, setTexts } from './functions.js'
 
 // Globals initiated in function initApp()
 let TEXTS // Array of text objects used in app.
@@ -19,13 +26,12 @@ let RUNNING = false // Boolean used to indicate if the game is running.
  */
 function initApp () {
   // Get texts
-  let text1 = new Text('Moln', 'Karin Boye', 'Se de mäktiga moln, vilkas fjärran höga toppar stolta, skimrande resa sig, vita som vit snö! Lugna glida de fram för att slutligen lugnt dö sakta lösande sig i en skur av svala droppar. Majestätiska moln - genom livet, genom döden gå de leende fram i en strålande sols sken utan skymmande oro i eter så klart ren, gå med storstilat, stilla förakt för sina öden.')
-  let text2 = new Text('Jag har en dröm', 'Martin Luther King Jr.', 'Så säger jag er, mina vänner, att jag trots dagens och morgondagens svårigheter har en dröm. Det är en dröm med djupa rötter i den amerikanska drömmen om att denna nation en dag kommer att resa sig och leva ut den övertygelsens innersta mening, som vi håller för självklar: Att alla människor är skapade med samma värde.')
-  let text3 = new Text('Doktor Glas', 'Hjalmar Söderberg', 'Jag stod vid pastor Gregorius bädd; han låg sjuk. Övre delen av hans kropp var blottad, och jag lyssnade på hans hjärta. Sängen stod i hans arbetsrum; en kammarorgel stod i ett hörn, och någon spelade på den. Ingen koral, knappt en melodi. Bara formlösa fugaartade tongångar fram och tillbaka. En dörr stod öppen; det oroade mig, men jag kunde inte komma mig för att få den stängd.')
-  TEXTS = [text1, text2, text3]
+  TEXTS = getTextsFromXml()
 
-  // Empty typing area
+  // Empty typing area and set default settings.
   document.getElementById('typing-area').value = ''
+  document.getElementById('case-ignore').checked = false
+  document.getElementById('swedish').checked = true
 
   // Initiate stats area and text area
   STATSAREA = new StatsArea()
@@ -33,8 +39,8 @@ function initApp () {
   TEXTAREA = new TextArea()
   TEXTAREA.setText(TEXTS[0])
 
-  // Initiate settings with text list.
-  initSettings(TEXTS)
+  // Set listed texts to swedish.
+  setLanguageEvent('swedish')
 
   // Set the app to stopped.
   stopApp()
@@ -44,7 +50,7 @@ function initApp () {
  * Function to be used with listener for change in text-selection. Changes the
  * active text.
  */
-function setActiveText () {
+function setTextEvent () {
   let newText = TEXTS.find(text => text.title === this.value)
   STATSAREA.reset()
   TEXTAREA.setText(newText)
@@ -53,7 +59,7 @@ function setActiveText () {
 /**
  * Toggles the game on or off depending on current state.
  */
-function toggleGame () {
+function toggleGameEvent () {
   let typingArea = document.getElementById('typing-area')
 
   if (RUNNING) {
@@ -72,7 +78,7 @@ function toggleGame () {
  * Handles the events when user types into typing area
  * @param {event object} event Keypress event.
  */
-function typingEventHandler (event) {
+function typingEvent (event) {
   // Ignore Shift, Backspace and arrowkeys
   if (shouldIgnore(event.key)) {
     event.preventDefault()
@@ -97,10 +103,20 @@ function typingEventHandler (event) {
  * Listener that enables starting and stopping the game using enter key.
  * @param {event object} event Keypress event.
  */
-function enterKeyEventHandler (event) {
+function enterKeyEvent (event) {
   if (event.key === 'Enter') {
-    toggleGame()
+    toggleGameEvent()
   }
+}
+
+/**
+ * Listenerfunction for use with the radio buttons to change language.
+ * @param {String} language String with language.
+ */
+function setLanguageEvent (language) {
+  let filteredTexts = TEXTS.filter((text) => { return text.language === language })
+  setTexts(filteredTexts)
+  TEXTAREA.setText(filteredTexts[0])
 }
 
 // Eventlisteners.
@@ -108,13 +124,17 @@ function enterKeyEventHandler (event) {
 window.addEventListener('load', initApp)
 
 // Listener for pressing the enter key, starts and stops the game.
-window.addEventListener('keyup', (event) => { enterKeyEventHandler(event) })
+window.addEventListener('keyup', (event) => { enterKeyEvent(event) })
 
 // Listener that checks if the text selection changes. Changes active text.
-document.getElementById('text-selection').addEventListener('change', setActiveText)
+document.getElementById('text-selection').addEventListener('change', setTextEvent)
 
 // Listener that records what the user types in the typing area when the app is running.
-document.getElementById('typing-area').addEventListener('keyup', (event) => { typingEventHandler(event) })
+document.getElementById('typing-area').addEventListener('keyup', (event) => { typingEvent(event) })
 
 // Listener for the playbutton. Is used to start and stop the game.
-document.getElementById('play-button').addEventListener('click', toggleGame)
+document.getElementById('play-button').addEventListener('click', toggleGameEvent)
+
+// Listener for change of language.
+document.getElementById('swedish').addEventListener('click', () => { setLanguageEvent('swedish') })
+document.getElementById('english').addEventListener('click', () => { setLanguageEvent('english') })
