@@ -61,11 +61,11 @@ header h1 {
   from {
     margin-left: 180%;
   }
-  10% {
+  5% {
     margin-left: 25%;
     margin-right: 25%;
   }
-  90% {
+  95% {
     margin-left: 25%;
     margin-right: 25%;
   }
@@ -78,11 +78,11 @@ header h1 {
   from {
     margin-left: 180%;
   }
-  10% {
+  5% {
     margin-left: 25%;
     margin-right: 25%;
   }
-  90% {
+  95% {
     margin-left: 25%;
     margin-right: 25%;
   }
@@ -145,7 +145,6 @@ h1 {
 
 td span {
   font-weight: bold;
-  font-size: 1.3em;
 }
 
 form {
@@ -199,6 +198,18 @@ form {
   color: transparent;
 }
 
+#typing-area:focus:-ms-input-placeholder {
+  color: transparent;
+}
+
+#typing-area:focus::-ms-input-placeholder {
+  color: transparent;
+}
+
+#typing-area:focus::placeholder {
+  color: transparent;
+}
+
 #play-button {
   background-image: url("/img/play-button.png");
   background-size: 100%;
@@ -229,7 +240,7 @@ form {
   border: 2px solid #ddddddee;
   margin: 5px;
   height: 100px;
-  width: 300px;
+  width: 250px;
 }
 
 #stats-area table {

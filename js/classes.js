@@ -12,6 +12,8 @@
  * app code.
  */
 
+/* global Audio */
+
 /**
  * Class representing a Text. Has an author and a string of words, can return
  * the amount of words and the amount of chars in.
@@ -63,6 +65,7 @@ export class TextArea {
     this._wordCount = document.getElementById('word-count')
     this._charCount = document.getElementById('char-count')
     this._activeCharIndex = 0
+    this._errorAudio = new Audio('/audio/error.m4a')
   }
 
   /**
@@ -108,11 +111,13 @@ export class TextArea {
       if (char !== corrChar.toLowerCase() && char !== corrChar.toUpperCase()) {
         chars[this._activeCharIndex].classList = 'typing-error'
         noError = false
+        this._errorAudio.play()
       }
     } else {
       if (char !== corrChar) {
         chars[this._activeCharIndex].classList = 'typing-error'
         noError = false
+        this._errorAudio.play()
       }
     }
 
@@ -156,20 +161,75 @@ export class TextArea {
  */
 export class StatsArea {
   constructor () {
-    // Get stat area elements
+    // Get stat area elements and set them to 0.
     this._statsDiagram = document.getElementById('stats-diagram')
     this._grossWpm = document.getElementById('gross-wpm')
     this._netWpm = document.getElementById('net-wpm')
     this._accuracy = document.getElementById('accuracy')
     this._errors = document.getElementById('errors')
 
-    this._goodWords = 0
-    this._badWords = 0
+    // Initiate variables that keeps track of typed entries and word errors.
+    this._typedEntries = 0
+    this._errorEntries = 0
+  }
 
-    this._grossWpm.innerHTML = 0
-    this._netWpm.innerHTML = 0
-    this._accuracy.innerHTML = 0
-    this._errors.innerHTML = 0
+  get currentWordErrorCount () {
+    return this._currentWordErrorCount
+  }
+
+  /**
+   * Starts stats timer.
+   */
+  start () {
+    this._startTime = new Date().getTime()
+    this._updater = setInterval(this.update.bind(this), 100)
+  }
+
+  /**
+   * Stops timer and returns the final time.
+   */
+  end () {
+    clearInterval(this._updater)
+    return (this._startTime - new Date().getTime()) / 1000
+  }
+
+  /**
+   * Increases typedEntries by one to indicate correct typing of one letter.
+   */
+  addCorrect () {
+    this._typedEntries++
+  }
+
+  /**
+   * Increases typedEntries and errorEntries by one to indicate incorrect typing
+   * of one letter.
+   */
+  addError () {
+    this._typedEntries++
+    this._errorEntries++
+  }
+
+  /**
+   * Calculates and updates the current stats based on the time elapsed and the
+   * entered letters.
+   */
+  update () {
+    // Calculate stats.
+    let elapsedMinutes = (new Date().getTime() - this._startTime) / 60000
+    let grossWpm = (this._typedEntries / 5) / elapsedMinutes
+    let errorsPm = (this._errorEntries / 5) / elapsedMinutes
+    let netWpm = grossWpm - errorsPm
+
+    // Put stats into app.
+    this._grossWpm.innerHTML = grossWpm.toFixed(0)
+    this._netWpm.innerHTML = netWpm.toFixed(0)
+    this._accuracy.innerHTML = (100 * (1 - (this._errorEntries / this._typedEntries))).toFixed(0) + '%'
+    this._errors.innerHTML = this._errorEntries
+
+    // Draw on statsdiagram.
+    let x = (250 / 2) * elapsedMinutes
+    let y = netWpm
+    this.addPoint(x, y)
   }
 
   /**
@@ -177,10 +237,17 @@ export class StatsArea {
    * lines to make the progress of the user more visible.
    */
   resetStatsDiagram () {
+    // Get canvas.
     let canvas = this._statsDiagram
     let ctx = canvas.getContext('2d')
+
+    // Clear canvas.
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    // Redraw lines indicating 25, 50 and 75.
     let height = canvas.height
+    ctx.strokeStyle = 'black'
+    ctx.fillStyle = 'black'
     for (let i = height / 4; i < canvas.height; i += height / 4) {
       ctx.moveTo(0, i)
       ctx.lineTo(300, i)
@@ -189,12 +256,29 @@ export class StatsArea {
   }
 
   /**
+   * Adds a point to the stats diagram that shows typing speed over time.
+   * @param {Number} value Typing speed in WPM, 0-100 will show on canvas.
+   * @param {Number} x X-coordinate.
+   * @param {Number} y Y-coordinate.
+   */
+  addPoint (x, y) {
+    let canvas = this._statsDiagram
+    let ctx = canvas.getContext('2d')
+    ctx.strokeStyle = 'red'
+    ctx.fillStyle = 'red'
+    ctx.fillRect(x, 100 - y, 2, 2)
+  }
+
+  /**
    * Resets the Stats area.
    */
   reset () {
-    this._grossWpm.innerHTML = 0
-    this._netWpm.innerHTML = 0
-    this._accuracy.innerHTML = 0
-    this._errors.innerHTML = 0
+    this._grossWpm.innerHTML = ''
+    this._netWpm.innerHTML = ''
+    this._accuracy.innerHTML = ''
+    this._errors.innerHTML = ''
+    this._typedEntries = 0
+    this._errorEntries = 0
+    this.resetStatsDiagram()
   }
 }

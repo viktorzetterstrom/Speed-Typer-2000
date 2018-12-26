@@ -15,7 +15,7 @@
 import { TextArea, StatsArea } from './classes.js'
 import { startApp, stopApp, isSpace, shouldIgnore, getTextsFromXml, setTexts } from './functions.js'
 
-// Globals initiated in function initApp()
+// Globals that keep track of app state. Initiated in function initApp()
 let TEXTS // Array of text objects used in app.
 let TEXTAREA // TextArea object encapsulating the text to be entered and its information.
 let STATSAREA // StatsArea object encapsulating the stats of the game.
@@ -65,9 +65,12 @@ function toggleGameEvent () {
   if (RUNNING) {
     RUNNING = false
     stopApp()
+    STATSAREA.end()
     typingArea.blur()
   } else {
     TEXTAREA.reset()
+    STATSAREA.reset()
+    STATSAREA.start()
     RUNNING = true
     startApp()
     typingArea.focus()
@@ -87,13 +90,22 @@ function typingEvent (event) {
   // Stop and reset if end is reached
   if (TEXTAREA.atEnd()) {
     RUNNING = false
+    STATSAREA.end()
     stopApp()
   }
 
-  // Ty
+  // Type the char, check if casing should be ignored.
   let ignoreCasing = document.getElementById('case-ignore').checked
-  TEXTAREA.typeChar(event.key, ignoreCasing)
+  let typingCorrect = TEXTAREA.typeChar(event.key, ignoreCasing)
 
+  // See if typing is correct, add accordingly to STATSAREA.
+  if (typingCorrect) {
+    STATSAREA.addCorrect()
+  } else {
+    STATSAREA.addError()
+  }
+
+  // If space is typed, reset typing area.
   if (isSpace(event.key)) {
     document.getElementById('typing-area').value = ''
   }
