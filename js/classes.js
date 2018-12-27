@@ -171,6 +171,11 @@ export class StatsArea {
     // Initiate variables that keeps track of typed entries and word errors.
     this._typedEntries = 0
     this._errorEntries = 0
+
+    // Variable for remembering what the previous point was when drawing on the
+    // stats diagram canvas.
+    this._previousX = null
+    this._previousY = null
   }
 
   get currentWordErrorCount () {
@@ -182,7 +187,7 @@ export class StatsArea {
    */
   start () {
     this._startTime = new Date().getTime()
-    this._updater = setInterval(this.update.bind(this), 100)
+    this._updater = setInterval(this.update.bind(this), 1000)
   }
 
   /**
@@ -227,9 +232,7 @@ export class StatsArea {
     this._errors.innerHTML = this._errorEntries
 
     // Draw on statsdiagram.
-    let x = (250 / 2) * elapsedMinutes
-    let y = netWpm
-    this.addPoint(x, y)
+    this.addPoint(netWpm)
   }
 
   /**
@@ -246,9 +249,9 @@ export class StatsArea {
 
     // Redraw lines indicating 25, 50 and 75.
     let height = canvas.height
-    ctx.strokeStyle = 'black'
-    ctx.fillStyle = 'black'
     for (let i = height / 4; i < canvas.height; i += height / 4) {
+      ctx.beginPath()
+      ctx.strokeStyle = 'black'
       ctx.moveTo(0, i)
       ctx.lineTo(300, i)
       ctx.stroke()
@@ -258,15 +261,33 @@ export class StatsArea {
   /**
    * Adds a point to the stats diagram that shows typing speed over time.
    * @param {Number} value Typing speed in WPM, 0-100 will show on canvas.
-   * @param {Number} x X-coordinate.
-   * @param {Number} y Y-coordinate.
    */
-  addPoint (x, y) {
+  addPoint (value) {
+    // Get canvas
     let canvas = this._statsDiagram
     let ctx = canvas.getContext('2d')
+
+    // Get previous point
+    let preX = this._previousX === null ? 0 : this._previousX
+    let preY = this._previousY === null ? 0 : this._previousY
+
+    // Get elapsed time
+    let elapsedMinutes = (new Date().getTime() - this._startTime) / 60000
+
+    // Calculate new x and y
+    let x = (canvas.width / 2) * elapsedMinutes
+    let y = canvas.height - (canvas.height / 100) * value
+
+    // Draw line from previous point
+    ctx.beginPath()
     ctx.strokeStyle = 'red'
-    ctx.fillStyle = 'red'
-    ctx.fillRect(x, 100 - y, 2, 2)
+    ctx.moveTo(preX, preY)
+    ctx.lineTo(x, y)
+    ctx.stroke()
+
+    // Store x and y as previous point
+    this._previousX = x
+    this._previousY = y
   }
 
   /**
@@ -279,6 +300,8 @@ export class StatsArea {
     this._errors.innerHTML = ''
     this._typedEntries = 0
     this._errorEntries = 0
+    this._previousX = null
+    this._previousY = null
     this.resetStatsDiagram()
   }
 }
