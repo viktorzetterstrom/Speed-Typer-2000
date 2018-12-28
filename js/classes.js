@@ -222,7 +222,7 @@ export class StatsArea {
     // Calculate stats.
     let elapsedMinutes = (new Date().getTime() - this._startTime) / 60000
     let grossWpm = (this._typedEntries / 5) / elapsedMinutes
-    let errorsPm = (this._errorEntries / 5) / elapsedMinutes
+    let errorsPm = this._errorEntries / elapsedMinutes
     let netWpm = grossWpm - errorsPm
 
     // Put stats into app.
