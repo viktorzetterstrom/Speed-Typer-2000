@@ -12,6 +12,10 @@ h1, h2, h3 {
   font-family: "staatliches", sans-serif;
 }
 
+h2 {
+  font-size: 20px;
+}
+
 body {
   background-image: url("../img/background.jpg");
   color: #f7f7f7;
@@ -61,13 +65,11 @@ header h1 {
   from {
     margin-left: 180%;
   }
-  5% {
-    margin-left: 25%;
-    margin-right: 25%;
+  10% {
+    margin-left: 15%;
   }
-  95% {
-    margin-left: 25%;
-    margin-right: 25%;
+  90% {
+    margin-left: 10%;
   }
   to {
     margin-left: -120%;
@@ -78,13 +80,11 @@ header h1 {
   from {
     margin-left: 180%;
   }
-  5% {
-    margin-left: 25%;
-    margin-right: 25%;
+  10% {
+    margin-left: 15%;
   }
-  95% {
-    margin-left: 25%;
-    margin-right: 25%;
+  90% {
+    margin-left: 10%;
   }
   to {
     margin-left: -120%;
@@ -113,12 +113,13 @@ header, #stats-area {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 h3 {
-  margin: 5px;
+  margin: 3px;
   font-size: 1em;
 }
 
@@ -136,7 +137,7 @@ td {
 }
 
 h1, h2 {
-  margin: 5px;
+  margin: 3px;
 }
 
 h1 {
@@ -164,6 +165,10 @@ form {
 
 #text-area h2, #text-area h3 {
   text-align: center;
+}
+
+#text-area p {
+  margin: 3px;
 }
 
 .running-ok {
@@ -238,7 +243,8 @@ form {
 #stats-diagram {
   background-color: rgba(128, 128, 128, 0.719);
   border: 2px solid #ddddddee;
-  margin: 5px;
+  margin-bottom: 10px;
+  margin-left: 10px;
   height: 100px;
   width: 250px;
 }
@@ -247,5 +253,9 @@ form {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+}
+
+#stats-section {
+  border-top: 2px solid #ddddddee;
 }
 /*# sourceMappingURL=style.css.map */
