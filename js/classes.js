@@ -269,7 +269,7 @@ export class StatsArea {
 
     // Get previous point
     let preX = this._previousX === null ? 0 : this._previousX
-    let preY = this._previousY === null ? 0 : this._previousY
+    let preY = this._previousY === null ? ctx.height : this._previousY
 
     // Get elapsed time
     let elapsedMinutes = (new Date().getTime() - this._startTime) / 60000
