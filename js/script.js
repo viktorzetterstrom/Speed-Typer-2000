@@ -82,13 +82,15 @@ function toggleGameEvent () {
  * @param {event object} event Keypress event.
  */
 function typingEvent (event) {
+  // If app is not running ignore event.
   // Ignore Shift, Backspace and arrowkeys
-  if (shouldIgnore(event.key)) {
+  // Stop and reset if end is reached
+  if (!RUNNING) {
+    return
+  } else if (shouldIgnore(event.key)) {
     event.preventDefault()
     return
-  }
-  // Stop and reset if end is reached
-  if (TEXTAREA.atEnd()) {
+  } else if (TEXTAREA.atEnd()) {
     RUNNING = false
     STATSAREA.end()
     stopApp()

@@ -82,7 +82,7 @@ export class TextArea {
 
     // Make a span for every char, make the first span active.
     let chars = text.getCharArray()
-    for (var i = 0; i < chars.length; i++) {
+    for (let i = 0; i < chars.length; i++) {
       if (i === 0) {
         this._wordsArea.innerHTML += `<span id=active-char>${chars[i]}</span>`
       } else {
@@ -100,7 +100,7 @@ export class TextArea {
    * @param {Boolean} ignoreCasing Boolean if casing should be ignored.
    */
   typeChar (char, ignoreCasing) {
-    var noError = true
+    let noError = true
     let chars = this._wordsArea.getElementsByTagName('span')
     chars[this._activeCharIndex].id = ''
     chars[this._activeCharIndex].classList = 'typed'
@@ -143,7 +143,7 @@ export class TextArea {
   reset () {
     this._activeCharIndex = 0
     let chars = this._wordsArea.getElementsByTagName('span')
-    for (var i = 0; i < chars.length; i++) {
+    for (let i = 0; i < chars.length; i++) {
       if (i === 0) {
         chars[i].id = 'active-char'
         chars[i].className = ''
