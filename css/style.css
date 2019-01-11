@@ -8,24 +8,6 @@
   src: url("../font/Staatliches-Regular.woff2") format("woff2");
 }
 
-@-webkit-keyframes slide-in-out {
-  from {
-    margin-left: 180%;
-  }
-
-  10% {
-    margin-left: 15%;
-  }
-
-  90% {
-    margin-left: 10%;
-  }
-
-  to {
-    margin-left: -120%;
-  }
-}
-
 @keyframes slide-in-out {
   from {
     margin-left: 180%;
@@ -54,6 +36,7 @@ body {
 }
 
 main {
+  box-sizing: border-box;
   background: #444444;
   border: 2px solid #ddddddee;
   width: 600px;
@@ -63,6 +46,7 @@ main {
 }
 
 header {
+  box-sizing: border-box;
   background: #444444;
   border-bottom: 2px solid #ddddddee;
   border-left: 2px solid #ddddddee;
@@ -72,19 +56,15 @@ header {
   margin: 0;
   top: 0;
   left: 50%;
-  -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   width: 600px;
   overflow: hidden;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
   justify-content: space-between;
 }
 
 footer {
+  box-sizing: border-box;
   background: #444444;
   border-top: 2px solid #ddddddee;
   border-left: 2px solid #ddddddee;
@@ -93,7 +73,6 @@ footer {
   position: fixed;
   bottom: 0;
   left: 50%;
-  -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   width: 600px;
 }
@@ -103,18 +82,11 @@ footer p {
 }
 
 #page-heading {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   white-space: nowrap;
-  -webkit-animation: slide-in-out;
   animation: slide-in-out;
-  -webkit-animation-duration: 10s;
   animation-duration: 10s;
-  -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
 }
 
@@ -162,10 +134,7 @@ td span {
 }
 
 form {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
   justify-content: space-around;
 }
 
@@ -178,8 +147,7 @@ form {
 }
 
 .running {
-  -webkit-box-shadow: 0px 0px 10px 0px white;
-  box-shadow: 0px 0px 10px 0px white;
+  box-shadow: 0 0 10px 0 white;
   transition: box-shadow 0.5s ease-in-out;
 }
 
@@ -207,26 +175,12 @@ form {
   text-align: center;
   font-size: 100%;
   font-family: "fira-code";
-  -webkit-box-shadow: 0px 0px 10px 0px white;
-  box-shadow: 0px 0px 10px 0px white;
+  box-shadow: 0 0 10px 0 white;
 }
 
 #typing-area:disabled {
   background: grey;
-  -webkit-box-shadow: none;
   box-shadow: none;
-}
-
-#typing-area:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-
-#typing-area:focus:-ms-input-placeholder {
-  color: transparent;
-}
-
-#typing-area:focus::-ms-input-placeholder {
-  color: transparent;
 }
 
 #typing-area:focus::placeholder {
@@ -242,8 +196,7 @@ form {
 }
 
 #play-button:hover {
-  -webkit-box-shadow: 0px 0px 5px 0px white;
-  box-shadow: 0px 0px 5px 0px white;
+  box-shadow: 0 0 5px 0 white;
 }
 
 #active-char {
@@ -251,7 +204,8 @@ form {
 }
 
 #stats-diagram {
-  background-color: rgba(128, 128, 128, 0.719);
+  box-sizing: border-box;
+  background-color: gray;
   border: 2px solid #ddddddee;
   margin-bottom: 10px;
   margin-left: 10px;
@@ -260,17 +214,11 @@ form {
 }
 
 #stats-area {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
   justify-content: space-between;
 }
 
 #stats-area table {
-  -ms-flex-item-align: center;
-  -ms-grid-row-align: center;
   align-self: center;
 }
 
