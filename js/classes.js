@@ -65,7 +65,7 @@ export class TextArea {
     this._wordCount = document.getElementById('word-count')
     this._charCount = document.getElementById('char-count')
     this._activeCharIndex = 0
-    this._errorAudio = new Audio('/audio/error.m4a')
+    this._errorAudio = new Audio('audio/error.m4a')
   }
 
   /**

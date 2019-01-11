@@ -58,11 +58,11 @@ export function getTextsFromXml () {
 export function startApp () {
   // Change playbutton.
   let playButton = document.getElementById('play-button')
-  playButton.style.backgroundImage = 'url("/img/stop-button.png")'
+  playButton.style.backgroundImage = 'url("../img/stop-button.png")'
 
   // Add box shadow.
   let textArea = document.getElementById('text-area')
-  textArea.className = 'running-ok'
+  textArea.className = 'running'
 
   // Disable settings.
   document.getElementById('text-selection').disabled = true
@@ -82,11 +82,11 @@ export function startApp () {
 export function stopApp () {
   // Change playbutton.
   let playButton = document.getElementById('play-button')
-  playButton.style.backgroundImage = 'url("/img/play-button.png")'
+  playButton.style.backgroundImage = 'url("../img/play-button.png")'
 
   // Remove box shadow.
   let textArea = document.getElementById('text-area')
-  textArea.className = ''
+  textArea.className = 'stopped'
 
   // Enable settings.
   document.getElementById('text-selection').disabled = false
