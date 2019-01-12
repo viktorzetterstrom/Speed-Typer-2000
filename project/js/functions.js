@@ -58,7 +58,7 @@ export function getTextsFromXml () {
 export function startApp () {
   // Change playbutton.
   let playButton = document.getElementById('play-button')
-  playButton.style.backgroundImage = 'url("../img/stop-button.png")'
+  playButton.style.backgroundImage = 'url("img/stop-button.png")'
 
   // Add box shadow.
   let textArea = document.getElementById('text-area')
@@ -82,7 +82,7 @@ export function startApp () {
 export function stopApp () {
   // Change playbutton.
   let playButton = document.getElementById('play-button')
-  playButton.style.backgroundImage = 'url("../img/play-button.png")'
+  playButton.style.backgroundImage = 'url("img/play-button.png")'
 
   // Remove box shadow.
   let textArea = document.getElementById('text-area')
