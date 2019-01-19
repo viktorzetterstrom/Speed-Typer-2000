@@ -4,6 +4,8 @@
 
 This project was created as part of the course DT146G - Web Programming with HTML5, CSS3 and JavaScript (7.5 Credits) at the Mid Sweden University. The app lets the user type in one of eight predefined texts with the goal of doing it as fast as they can.
 
+You can find a hosted version [here](http://studenter.miun.se/~vize1500/dt146g/)
+
 ## Running
 
 The app is started by either pressing the enter key or by pressing the start button right below the typing area. Focus is automatically put into the textbox for typing when the game is started. Statistics are shown below, these are reset when a new game is started.
